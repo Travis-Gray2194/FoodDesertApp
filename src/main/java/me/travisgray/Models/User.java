@@ -41,14 +41,13 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, String firstname, String lastName, boolean enabled, String username, Collection<Role> roles) {
+    public User(String email, String password, String firstname, String lastName, boolean enabled, String username) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
-        this.roles = roles;
     }
 
     public long getId() {

@@ -1,17 +1,22 @@
 package me.travisgray.Security;
 
+import me.travisgray.Repositories.UserRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 /**
  * Created by ${TravisGray} on 11/13/2017.
  */
+
+
 
 
 //Once you have basic security setup , adding a login form is a simple process.
@@ -50,19 +55,41 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SSUserDetailsService ssUserDetailsService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/")
-//                Change in S
-                .access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-                .antMatchers("/admin").access("hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/","/h2-console/**").permitAll()
+
+
+
+
+//                .access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
+//                .antMatchers("/admin").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
+                .logout()
+                .logoutRequestMatcher(
+                        new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").permitAll().permitAll()
+                .and()
                 .httpBasic();
+
+        http
+                .csrf().disable();
+
+        http
+                .headers().frameOptions().disable();
     }
 //.httpBasic() This means that the user can avoid a login prompt by putting his/her login details in the request.
 //    This can be used for testing, but should be removed before the application goes live.
