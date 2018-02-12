@@ -8,6 +8,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-sringsecurity3">
     <title>Spring Security Example</title>
 </head>
 <body>
+
+
+<!--Login Form-->
+<!--This form is displayed when users vist a page that requires authentitication. This passes the information on to Spring Security, and if the username and password are correct, the user is allowed to see the page
+.If the user enter incorrect details, he/she will see a message indiiacting that the login detials were incorrect. The code below displays an error message if login detials are incorrect.-->
 <div th:if="${param.error}">
     Invalid Username and Password
 </div>
