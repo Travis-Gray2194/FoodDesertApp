@@ -34,6 +34,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+//    Create method to save as Admin or User with The new user model
+
     public void saveUser(User user) {
         user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
         user.setEnabled(true);

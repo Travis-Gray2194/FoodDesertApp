@@ -9,7 +9,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.hibernate.criterion.Restrictions.and;
 
 
 /**
@@ -57,23 +60,28 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SSUserDetailsService ssUserDetailsService;
+    private SSUserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
 
+//    Overriding Spring security and passing in Service to look for userrepository database
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return new SSUserDetailsService(userRepository);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/h2-console/**").permitAll()
+                .antMatchers("/","/h2-console/**","/register").permitAll()
 
 
 
 
 //                .access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-//                .antMatchers("/admin").access("hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/admin").access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -112,6 +120,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         and().
         withUser("dave").password("begreat").authorities("ADMIN");
 
+//        Database Authentication must come after in memory authentication
+        auth
+                .userDetailsService(userDetailsServiceBean());
 
     }
+
+
+
+
 }

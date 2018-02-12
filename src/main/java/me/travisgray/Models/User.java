@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @Column(name = "first_name")
-    private String firstname;
+    private String firstName;
 
 
     @Column(name = "last_name")
@@ -41,13 +41,21 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, String firstname, String lastName, boolean enabled, String username) {
+    public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
         this.email = email;
         this.password = password;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public long getId() {
@@ -74,13 +82,7 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     public String getLastName() {
         return lastName;

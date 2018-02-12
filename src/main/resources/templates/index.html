@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-sringsecurity">
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
 </head>
 <body>
-<h2>Index Page</h2>
+<h2>Insecure Page</h2>
+<div sec:authorize="hasAuthority('ADMIN')">
+    This content is only show to Admin authenticated users. <br />
+</div>
+
+
+<div sec:authorize="hasAuthority('USER')">
+    This content is only show to authenticated users.
+</div>
+
+
+Logged user: <span sec:authentication="name">
+    The value of the "name" property of authentication object should apper here. </span><br />
+
+<!--Roles: <span sec:authentication="principal.hasauthorities">[USER, ADMIN]</span><br /><br />-->
+
+
+<!--<div class="row" sec:authorize="hasAuthority('ADMIN')">-->
+    <!--<div class="col-md-10 col-md-offset-2">-->
+        <!--<h2>User Has Role Admin</h2>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="row" sec:authorize="hasAuthority('USER')">-->
+    <!--<div class="col-md-10 col-md-offset-2">-->
+        <!--<h2>User Has Authority Admin</h2>-->
+    <!--</div>-->
+
+<div sec:authorize="isAnonymous()">
+    This content is only shown to anonymous users.</div>
+
+<a href="/login">Login</a>
+<a href="/logout">Logout</a>
+<a href="/register">Register</a>
+<a href="/secure">Secure Page</a>
 </body>
 </html>
