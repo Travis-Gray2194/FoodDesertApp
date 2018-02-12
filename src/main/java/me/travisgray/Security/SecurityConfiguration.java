@@ -1,4 +1,4 @@
-package me.travisgray;
+package me.travisgray.Security;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Configuration;
