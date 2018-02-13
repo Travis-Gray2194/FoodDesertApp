@@ -2,7 +2,7 @@ package me.travisgray.Models;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+//Assigns Roles Store of all roles avialble just a list of roles availble as a List.
 @Entity
 public class Role {
 

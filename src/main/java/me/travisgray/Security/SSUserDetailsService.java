@@ -16,6 +16,8 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+//Once you authentification the USerDetails service is to make sure once you have authetification from dtabase you can see what roles they have and access for spring security
+
 @Transactional
 @Service
 public class SSUserDetailsService implements UserDetailsService {
