@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pantry</title>
+    <meta name="viewport" content="width=device-width, inital-scale=1">
+    <!-- This is embedded stylesheet. -->
+    <!-- adding fonts to website to make it more attractive. Use google fonts by refrencing the css on the Google Fonts APIs CDN -->
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, inital-scale=1">
+    <link rel="stylesheet" href="css/recipebookstyle.css">
+    <link rel="stylesheet" type="text/css" href="foodapp.css">
+</head>
+<body>
+<div class="container">
+    <div class="well well-sm">
+        <!-- A simple navigation bar with Twitter Bootstrap -->
+        <!-- Start with the navigation bar. It should be within a nav element, and showld have the classes indictaed below.They can be default, inverse, or transparent-->
+        <nav class="navbar navbar-inverse">
+            <!-- Make sure the container is available so that the content can be appropriately laid out -->
+            <div class="container-fluid">
+                <!-- if you want a prominent place to show the name of the application or website, use a brand. Remember that the text (and navbar) can be styled to suit the 'client'-->
+                <div class="navbar-header">
+                    <!-- Create a button to display the navbar when the screen is collapsed. This is why you add the collapsed class to the button-->
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#my-collapsible-navbar"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="glyphicon glyphicon-envleope"></span>
+                    </button>
+
+                    <a class="navbar-brand">My Pantry</a>
+                </div>
+                <!-- Include an unordered list for the navigation links -->
+                <div class="collapse navbar-collapse" id="my-collapsible-navbar">
+                    <!-- Surrond the nav bar with a div that tells the navbar that it will display the content when the data target #my-collapsible-navbar is toggled -->
+                    <ul class="nav navbar-nav">
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="products" class="row list-group">
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="https://0201.nccdn.net/4_2/000/000/002/113/Pork-meat-in-shop.jpg" alt="meats" />
+                <div class="caption">
+                    
+                    <h3 class="group inner list-group-item-heading meat">Meats</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                Ground Beef
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                Chicken
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="https://www.organicfacts.net/wp-content/uploads/vegetarianfood.jpg" alt="vegetables" />
+                <div class="caption">
+                    <h3 class="group inner list-group-item-heading">Vegetables</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Carrots</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success"  th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Pepper</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://cdn.ahchealthenews.com/wp-content/uploads/2017/05/Untitled-1.png" alt="fruit" />
+                <div class="caption">
+                    <h3 class="group inner list-group-item-heading">Fruits</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Banana</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Apple</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://st1.thehealthsite.com/wp-content/uploads/2015/12/dairy-products.jpg" alt="injera" />
+                <div class="caption">
+                    <h3 class="group inner list-group-item-heading">Dairy</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Milk</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Eggs</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://www.world-grain.com/-/media/ImagesNew/WorldGrain/Article-photos/2018/05/Whole-grains_E.jpg?la=en&hash=901EB1997BED7AFA423029F59534EAB213237FFE" alt="" />
+                <div class="caption">
+                    <h3 class="group inner list-group-item-heading">
+                        Grain</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Rice</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">Wheat</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/addtopledge/{id}(id=${item.id})}">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

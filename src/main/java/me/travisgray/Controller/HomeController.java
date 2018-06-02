@@ -69,6 +69,12 @@ public class HomeController {
 
 
 
+    @GetMapping("/pickup")
+    public String pickupForm(Model model){
+        model.addAttribute("item", new Item());
+
+        return "recipe";
+    }
 
 
 

@@ -57,19 +57,35 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(user4);
 
 
-        Item item1 = new Item("http://media.buzzle.com/media/images-en/gallery/conceptual/600-114334522-fruit-punch-in-glasses.jpg","Fruit Punch","5","Drink" );
+        Item item6 = new Item("https://assets.epicurious.com/photos/590a09c0246f17645fc62139/2:1/w_1260%2Ch_630/Ground_Beef_Craft_Paper_03052017.jpg","Ground Beef","5","Food" );
+        itemRepository.save(item6);
+
+        Item item1 = new Item("https://cdn-image.foodandwine.com/sites/default/files/styles/medium_2x/public/201408-xl-lemon-thyme-roast-chicken.jpg?itok=Q6Mx3Te2","Chicken","5","Drink" );
         itemRepository.save(item1);
 
-        Item item2 = new Item("http://a0.fanbread.com/uploads/image/file/42469/extra_large_jerk-chicken-940.jpg?fd6a071b7412f614090e924c651ac7af","Jerk Chicken","5","Food" );
+        Item item2 = new Item("https://www.pepperscale.com/wp-content/uploads/2016/01/bell-pepper-substitute.jpg","Pepper","5","Food" );
         itemRepository.save(item2);
 
-        Item item3 = new Item("http://www.jamesandeverett.com/whatscooking/wp-content/uploads/2012/11/Tuaca-hot-apple-pie-3.jpg","Apple Pie","5","Desert" );
+        Item item3 = new Item("http://bcfresh.ca/wp-content/uploads/2016/03/carrots.jpg","Carrots","5","Food" );
         itemRepository.save(item3);
 
-        Item item4 = new Item("https://holisticwellness.ca/wp-content/uploads/2015/07/chocolate-ice-cream.gif","Choclate Ice Cream","10","Desert" );
+        Item item4 = new Item("http://dreamatico.com/data_images/apple/apple-8.jpg","Apple","10","Food" );
         itemRepository.save(item4);
 
-        Item item5 = new Item("https://i1.wp.com/www.nigerianlazychef.com/wp-content/uploads/2015/07/IMG_6605-2.jpg","Jollof Rice","10","Food" );
+        Item item5 = new Item("https://vignette.wikia.nocookie.net/deathbattle/images/4/4c/Milk-carton-thumbnail.jpg/revision/latest/scale-to-width-down/480?cb=20170402204752","Milk","10","Food" );
         itemRepository.save(item5);
+
+
+        Item item7 = new Item("https://vignette.wikia.nocookie.net/epicrapbattlesofhistory/images/c/c7/Banana.jpg/revision/latest?cb=20140911204945","Banana","10","Food" );
+        itemRepository.save(item7);
+
+        Item item8 = new Item("https://static1.squarespace.com/static/57b72c3cff7c50cc4363be14/t/5a446a83e4966b67c56a8696/1514433727321/eggs.jpg?format=750w","Eggs","10","Food" );
+        itemRepository.save(item8);
+
+        Item item9 = new Item("http://store.foodforhealthinternational.com/images/products/4599.jpg","Rice","10","Food" );
+        itemRepository.save(item9);
+
+        Item item10 = new Item("https://upload.wikimedia.org/wikipedia/commons/b/bc/A_field_of_wheat.JPG","Wheat","10","Food" );
+        itemRepository.save(item10);
     }
 }
