@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.tymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link rel="stylesheet" href="css/addformcss.css">
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/creative.css">
+    <link rel="stylesheet" href="/../static/css/creative.css">
+    <link rel="stylesheet" href="/../static/css/creative.min.css">
+</head>
+<body>
+
+<div th:replace="index :: navbar"></div>
+
+<div class="body-content">
+    <div class="module">
+        <h1>Add Item to List!</h1>
+        <form class="form" action="#" th:action="@{/additem}" th:object="${item}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+
+            <label>Item Name:</label>
+            <span th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></span>
+            <input type="text" class="form-control" placeholder="Item Name" th:field="*{itemName}">
+
+            <label >Serving Size:</label>
+            <span th:if="${#fields.hasErrors('servingSize')}" th:errors="*{servingSize}"></span>
+            <input type="number" class="form-control" placeholder="Item Serving Size" th:field="*{servingSize}">
+
+            <br />
+
+
+            <label >Item Type:</label>
+            <span th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}"></span>
+            <select th:field="*{itemType}">
+                <option value="Food">Food</option>
+                <option value="Drink">Drink</option>
+                <option value="Desert">Desert</option>
+            </select>
+
+
+            <label >Image:</label>
+            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+            <input type="text" placeholder="Image" class="form-control" th:field="*{image}">
+
+            <input type="submit" value="Save" name="save" class="btn btn-block btn-primary" />
+
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -67,22 +67,17 @@ public class HomeController {
         return "index";
     }
 
+
+
+
+
+
     @GetMapping("/add")
     public String potluckitemForm(Model model){
         model.addAttribute("item", new Item());
 
         return "additemform";
     }
-
-    @GetMapping("/list")
-    public String listApartments(Model model){
-        model.addAttribute("itemlist",itemRepository.findAll());
-//        Storing Book entries correctly
-        return "itemlist";
-    }
-
-
-
 
 
     //    Must pass created book entry here then save to repository model for thymeleaf loop
@@ -102,6 +97,13 @@ public class HomeController {
         userRepository.save(user);
         itemRepository.save(item);
         model.addAttribute("itemlist",itemRepository.findAll());
+        return "itemlist";
+    }
+
+    @GetMapping("/list")
+    public String listApartments(Model model){
+        model.addAttribute("itemlist",itemRepository.findAll());
+//        Storing Book entries correctly
         return "itemlist";
     }
 

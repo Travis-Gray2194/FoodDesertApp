@@ -38,13 +38,19 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <p class="navbar-brand">User: <i th:fragment="currentuser"><span th:text ="${#authentication.getName()}"></span></i></p>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="itemlist.html">Food List</a>
+            <a class="nav-link js-scroll-trigger" th:href="@{/list}">Food List</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" th:href="@{/add}">Add Item</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Shopping Cart</a>
@@ -55,8 +61,13 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" th:href="@{/search}">Search</a>
+            </li>
           </ul>
         </div>
+
+
       </div>
     </nav>
 
@@ -71,6 +82,15 @@
           </div>
           <div class="col-lg-8 mx-auto" >
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" th:href="@{/register}">Sign Up</a>
+
+            <div sec:authorize="isAnonymous()">
+              <!--This content is only shown to anonymous users.-->
+
+              <a class="btn btn-primary btn-xl js-scroll-trigger" th:href="@{/login}">Login</a>
+            </div>
+
+
           </div>
         </div>
       </div>
