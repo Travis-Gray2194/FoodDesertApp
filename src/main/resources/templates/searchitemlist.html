@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Course</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+</head>
+<body>
+
+<!--nav bar and css components-->
+<div class="container">
+    <h1 class="text-center">Product Search Results</h1>
+    <div class="col-md-8 col-md-offset-4">
+        <div th:if="${search}!=null" th:inline="text">You searched for [[${search}]]</div>
+        <table th:if="${itemsearch}" class="table">
+
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Serving Size</th>
+                <th>Type</th>
+                <th>Name</th>
+            </tr>
+
+            </thead>
+            <tbody>
+
+
+            <tr th:each="item :${itemsearch}">
+                <td><img th:src="${item.image}" style="height: 200px"></td>
+                <td th:text="${item.servingSize}">Servering Size</td>
+                <td th:text="${item.itemType}">Type </td>
+                <td th:text="${item.itemName}">Name</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

@@ -4,7 +4,6 @@ package me.travisgray.Security;
 import me.travisgray.Models.Role;
 import me.travisgray.Models.User;
 import me.travisgray.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

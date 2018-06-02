@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/tablestyle.css">
+    <link rel="stylesheet" href="/css/tablestyle.css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/creative.css">
+    <link rel="stylesheet" href="/../static/css/creative.css">
+    <link rel="stylesheet" href="/../static/css/creative.min.css">
+    <link rel="stylesheet" href="css/tablestyle.css">
+</head>
+<body>
+
+
+
+<div th:replace="index :: navbar"></div>
+
+
+<table>
+    <tr>
+        <th>Food</th>
+
+        <th>Serving Size</th>
+
+
+        <th>Item Type:</th>
+
+        <th>Item Name</th>
+        <th>Provided By:</th>
+
+    </tr>
+
+    <tr th:each="item : ${itemlist}">
+        <td><img th:src="${item.image}" style="height: 200px"></td>
+        <td th:text="${item.servingSize}"></td>
+        <td th:text="${item.itemType}"></td>
+        <td th:text="${item.itemName}"></td>
+
+        <td>
+          <span th:each="user:${item.user}">
+            <p th:text="${user.firstName}"></p>
+          </span>
+        </td>
+        <td th:text="${item.itemName}"></td>
+
+        <td>
+            <p class="lead text-center"><a class="btn btn-lg btn-info" style="color: #EF4135" th:href="@{/update/{id}(id=${item.id})}" target="_self">
+                Change Item Listing
+            </a></p>
+
+
+            <p class="lead text-center"><a class="btn btn-lg btn-info" style="color: #EF4135" th:href="@{/delete/{id}(id=${item.id})}" target="_self">
+                Remove this Food Item
+            </a></p>
+
+            <p class="lead text-center"><a class="btn btn-lg btn-info" style="color: #EF4135" th:href="@{/addtopledge/{id}(id=${item.id})}" target="_self">
+                Add this Food Item to My Shopping List
+            </a></p>
+
+
+        </td>
+    </tr>
+</table>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

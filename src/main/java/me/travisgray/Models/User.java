@@ -2,6 +2,8 @@ package me.travisgray.Models;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="USER_DATA")
@@ -38,7 +40,12 @@ public class User {
     inverseJoinColumns = @JoinColumn(name="role_id"))
     private Collection<Role> roles;
 
+    @ManyToMany()
+    private Set<Item> items;
+
+
     public User() {
+        this.items = new HashSet<Item>();
     }
 
     public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
@@ -48,6 +55,18 @@ public class User {
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
+    }
+
+    public void addItem(Item i){
+        this.items.add(i);
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public String getFirstName() {

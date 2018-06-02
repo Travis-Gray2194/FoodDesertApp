@@ -1,7 +1,9 @@
 package me.travisgray.Controller;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import me.travisgray.Models.Item;
 import me.travisgray.Models.User;
+import me.travisgray.Repositories.ItemRepository;
+import me.travisgray.Repositories.UserRepository;
 import me.travisgray.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,10 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,6 +26,12 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ItemRepository itemRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping("/")
     public String index(){
@@ -62,6 +67,56 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/add")
+    public String potluckitemForm(Model model){
+        model.addAttribute("item", new Item());
+
+        return "additemform";
+    }
+
+    @GetMapping("/list")
+    public String listApartments(Model model){
+        model.addAttribute("itemlist",itemRepository.findAll());
+//        Storing Book entries correctly
+        return "itemlist";
+    }
+
+
+
+
+
+    //    Must pass created book entry here then save to repository model for thymeleaf loop
+    @PostMapping("/add")
+    public String processapartmentForm(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model, Authentication auth){
+
+        if (result.hasErrors()){
+            return "additemform";
+        }
+
+////        Check to see if image value is empty if it is then set default image string for thymeleaf add form
+//        System.out.println("Test to see checkout status text field being stored correctly"+readingBook.getCheckoutstatus().equalsIgnoreCase("Borrow"));
+//        Need to make sure to add all books to model for thymeleaf access after this route is complete
+
+        User user = userRepository.findByUsername(auth.getName());
+        item.addUser(user);
+        userRepository.save(user);
+        itemRepository.save(item);
+        model.addAttribute("itemlist",itemRepository.findAll());
+        return "itemlist";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateBooks(@PathVariable("id") long id, Model model){
+        model.addAttribute("item",itemRepository.findOne(id));
+        return "redirect:/additemform";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable("id") long id, Model model){
+        model.addAttribute("item",itemRepository.findOne(id));
+        itemRepository.delete(id);
+        return "redirect:/itemlist";
+    }
 
     @RequestMapping("/secure")
     public String secure(HttpServletRequest request, Authentication authentication, Principal principal) {
@@ -71,5 +126,49 @@ public class HomeController {
                 authentication.getPrincipal();
         String username = principal.getName();
         return "secure";
+    }
+
+    @GetMapping("/addtopledge/{id}")
+    public String additemtopledgelist(@PathVariable("id") long id, Model model, Authentication auth){
+
+        Item item = itemRepository.findOne(id);
+//        Must use database user not spring security user
+        User user = userRepository.findByUsername(auth.getName());
+        user.addItem(item);
+        model.addAttribute("items4user", itemRepository.findOne(id));
+        itemRepository.save(item);
+        userRepository.save(user);
+        model.addAttribute("userlist",userRepository.findAll());
+        model.addAttribute("itemslist",userRepository.findAll());
+        return "useritemslist";
+    }
+
+//    @GetMapping("/addtopledge")
+//    public String additemtopledgelist(HttpServletRequest request, Model model, Authentication auth){
+//
+//        String itemId = request.getParameter("id");
+//        Item item = itemRepository.findOne(new Long(itemId));
+////        Must use database user not spring security user
+//        User user = userRepository.findByUsername(auth.getName());
+//        user.addItem(item);
+//        model.addAttribute("items4user", itemRepository.findOne(new Long(itemId)));
+//        return "useritemslist";
+//    }
+
+    @GetMapping("/search")
+    public String getSearch(){
+        return "searchform";
+    }
+
+    @PostMapping("/search")
+    public String showSearchResults(HttpServletRequest request, Model model){
+        String searchItems = request.getParameter("search");
+        model.addAttribute("search",searchItems);
+//
+
+//        Expecting multiple parameters or else will throw No parameter available Need to pass as many as are in constructor in Entity.
+        model.addAttribute("itemsearch",itemRepository.findAllByItemNameContainingIgnoreCase(searchItems));
+//
+        return "searchitemlist";
     }
 }
