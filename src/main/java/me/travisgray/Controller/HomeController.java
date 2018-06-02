@@ -148,8 +148,8 @@ public class HomeController {
         itemRepository.save(item);
         userRepository.save(user);
         model.addAttribute("userlist",userRepository.findAll());
-        model.addAttribute("itemslist",userRepository.findAll());
-        return "redirect:/list";
+        model.addAttribute("items4user",itemRepository.findAll());
+        return "useritemslist";
     }
 
 //    @GetMapping("/addtopledge")
