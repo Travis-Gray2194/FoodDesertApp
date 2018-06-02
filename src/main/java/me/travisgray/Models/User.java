@@ -1,13 +1,20 @@
 package me.travisgray.Models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="USER_DATA")
-public class User {
+public class User implements Serializable {
+
+    @Transient
+    PasswordEncoder encoder;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,17 +47,17 @@ public class User {
     inverseJoinColumns = @JoinColumn(name="role_id"))
     private Collection<Role> roles;
 
-    @ManyToMany()
+    @OneToMany(mappedBy = "user")
     private Set<Item> items;
 
 
     public User() {
-        this.items = new HashSet<Item>();
+        this.items = new HashSet<>();
     }
 
     public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
         this.email = email;
-        this.password = password;
+        setPassword(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.enabled = enabled;
@@ -98,7 +105,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
 

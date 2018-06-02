@@ -82,7 +82,7 @@ public class HomeController {
 
     //    Must pass created book entry here then save to repository model for thymeleaf loop
     @PostMapping("/add")
-    public String processapartmentForm(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model, Authentication auth){
+    public String processPotluckForm(@Valid @ModelAttribute("anItem") Item item, BindingResult result, Authentication auth,Model model){
 
         if (result.hasErrors()){
             return "additemform";
@@ -93,9 +93,10 @@ public class HomeController {
 //        Need to make sure to add all books to model for thymeleaf access after this route is complete
 
         User user = userRepository.findByUsername(auth.getName());
-        item.addUser(user);
-        userRepository.save(user);
+        item.setUser(user);
         itemRepository.save(item);
+        userRepository.save(user);
+
         model.addAttribute("itemlist",itemRepository.findAll());
         return "itemlist";
     }
@@ -110,14 +111,14 @@ public class HomeController {
     @GetMapping("/update/{id}")
     public String updateBooks(@PathVariable("id") long id, Model model){
         model.addAttribute("item",itemRepository.findOne(id));
-        return "redirect:/additemform";
+        return "redirect:/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") long id, Model model){
         model.addAttribute("item",itemRepository.findOne(id));
         itemRepository.delete(id);
-        return "redirect:/itemlist";
+        return "redirect:/list";
     }
 
     @RequestMapping("/secure")
@@ -142,7 +143,7 @@ public class HomeController {
         userRepository.save(user);
         model.addAttribute("userlist",userRepository.findAll());
         model.addAttribute("itemslist",userRepository.findAll());
-        return "useritemslist";
+        return "redirect:/list";
     }
 
 //    @GetMapping("/addtopledge")

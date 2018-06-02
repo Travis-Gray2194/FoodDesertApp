@@ -23,12 +23,14 @@ public class Item {
 
     private String itemType;
 
-    @ManyToMany(mappedBy = "items")
-    private Set<User> user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Item() {
 
-        this.user = new HashSet<User>();
     }
 
     public Item(String image, String itemName, String servingSize, String itemType) {
@@ -38,16 +40,12 @@ public class Item {
         this.itemType = itemType;
     }
 
-    public void addUser(User u){
-        this.user.add(u);
-    }
 
-
-    public Set<User> getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Set<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

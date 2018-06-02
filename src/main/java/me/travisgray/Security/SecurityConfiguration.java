@@ -2,12 +2,15 @@ package me.travisgray.Security;
 
 import me.travisgray.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -68,6 +71,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Bean
+    PasswordEncoder passwordEncoder () {
+        return new BCryptPasswordEncoder();
+    }
 
 //    Overriding Spring security and passing in Service to look for userrepository database
 //    Get results of current user and what thier rights are
@@ -155,7 +163,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 //        Database Authentication must come after in memory authentication
         auth
-                .userDetailsService(userDetailsServiceBean());
+                .userDetailsService(userDetailsServiceBean()).passwordEncoder(passwordEncoder());
 
     }
 
